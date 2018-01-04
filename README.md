@@ -2,6 +2,8 @@
 
 > Create coverage report from `window.__coverage__` object
 
+[![Coverage Status](https://coveralls.io/repos/github/miloss/coverage-service/badge.svg?branch=master)](https://coveralls.io/github/miloss/coverage-service?branch=master)
+
 # API
 
 

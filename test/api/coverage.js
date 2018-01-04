@@ -80,15 +80,6 @@ describe('GET /api/coverage/:hash', () => {
 
 describe('GET /api/coverage/html/:hash', () => {
 
-    it('should respond with error if :hash not found in git', done => {
-        chai.request(app)
-            .get('/api/coverage/html/foobar')
-            .end((err, res) => {
-                expect(res).to.have.status(500);
-                done();
-            });
-    });
-
     xit('should checkout git version and get HTML report if exists', done => {
         done();
     });
