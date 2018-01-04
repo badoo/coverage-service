@@ -1,0 +1,16 @@
+{
+    "extends": "standard",
+    "rules": {
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "space-before-function-paren": ["error", "never"],
+        "no-console": 0
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "env": {
+        "node": true
+    }
+}

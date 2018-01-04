@@ -1,0 +1,53 @@
+{
+  "name": "coverage-service",
+  "version": "0.1.0",
+  "description": "Get code coverage report from window.__coverage__ object",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "link-nyc-output": "rm -rf .nyc_output; ln -s data/.nyc_output",
+    "start": "node ./src/index",
+    "start:watch": "nodemon --ext js,json --watch src --exec 'npm run start'",
+    "shrink": "echo 'Remove node modules' && rm -rf node_modules && rm -f npm-shrinkwrap.json && echo 'Reinstall modules' && npm install . && echo 'Shrinkwrap' && npm shrinkwrap --dev",
+    "test": "mocha test/app.js test/**/*.js --exit",
+    "test:coverage": "nyc --reporter=text --reporter=html mocha test/app.js test/**/*.js --exit; npm run link-nyc-output",
+    "test:coverage:summary": "nyc --reporter=text-summary mocha test/app.js test/**/*.js --exit; npm run link-nyc-output",
+    "test:watch": "nodemon --ext js,json --watch src --watch test --exec 'npm run test'"
+  },
+  "keywords": [
+    "code",
+    "coverage",
+    "istanbul",
+    "functional",
+    "tests",
+    "nyc"
+  ],
+  "author": {
+    "name": "Milos Popovic",
+    "email": "milos.popovic@corp.badoo.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "mkdirp": "^0.5.1",
+    "mv": "^2.1.1",
+    "node-tar.gz": "^1.0.0",
+    "nyc": "11.0.3",
+    "rimraf": "^2.6.2",
+    "semver-compare": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.12.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^4.0.1",
+    "ncp": "^2.0.0",
+    "nodemon": "^1.12.1"
+  }
+}
