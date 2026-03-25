@@ -1,5 +1,5 @@
 const spawn = require('child_process').spawn;
-const exec = require('child_process').exec;
+const execFile = require('child_process').execFile;
 
 function clone(cwd, done) {
     const proc = spawn('git', ['clone', '--progress', process.env.REPO, 'repo'], {
@@ -9,9 +9,20 @@ function clone(cwd, done) {
 }
 
 function checkout(cwd, hash, done) {
-    const cmd = `git checkout ${process.env.REPO_BRANCH} && git pull origin ${process.env.REPO_BRANCH} && git checkout ${hash}`;
-    exec(cmd, { cwd }, (err, stdout) => {
-        done(err, stdout);
+    const branch = process.env.REPO_BRANCH;
+
+    execFile('git', ['checkout', branch], { cwd }, (err1) => {
+        if (err1) {
+            return done(err1, null);
+        }
+        execFile('git', ['pull', 'origin', branch], { cwd }, (err2) => {
+            if (err2) {
+                return done(err2, null);
+            }
+            execFile('git', ['checkout', hash], { cwd }, (err3, stdout) => {
+                done(err3, stdout);
+            });
+        });
     });
 }
 
